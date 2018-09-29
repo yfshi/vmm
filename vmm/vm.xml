@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<vmm>
+  <vmware>D:\Program Files (x86)\VMware\VMware Workstation</vmware>
+  <vmhost name="vm">H:\Vmwares\CentOS6.4\CentOS6.4.vmx</vmhost>
+  <vmhost name="kadev">H:\Vmwares\kadev\ka.vmx</vmhost>
+  <vmhost name="ka">H:\Vmwares\ka\ka.vmx</vmhost>
+  <vmhost name="ka1">H:\Vmwares\ka1\ka.vmx</vmhost>
+  <vmhost name="ka2">H:\Vmwares\ka2\ka.vmx</vmhost>
+  <vmhost name="ka3">H:\Vmwares\ka3\ka.vmx</vmhost>
+  <vmhost name="ka4">H:\Vmwares\ka4\ka.vmx</vmhost>
+  <vmhost name="test">22222</vmhost>
+</vmm>

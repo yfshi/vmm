@@ -1,0 +1,12 @@
+F:\test\vmm\vmm\bin\Debug\vmm.exe.manifest
+F:\test\vmm\vmm\bin\Debug\vmm.application
+F:\test\vmm\vmm\bin\Debug\vmm.exe
+F:\test\vmm\vmm\bin\Debug\vmm.pdb
+F:\test\vmm\vmm\obj\Debug\ResolveAssemblyReference.cache
+F:\test\vmm\vmm\obj\Debug\vmm.Properties.Resources.resources
+F:\test\vmm\vmm\obj\Debug\vmm.VmmForm.resources
+F:\test\vmm\vmm\obj\Debug\vmm.csproj.GenerateResource.Cache
+F:\test\vmm\vmm\obj\Debug\vmm.exe.manifest
+F:\test\vmm\vmm\obj\Debug\vmm.application
+F:\test\vmm\vmm\obj\Debug\vmm.exe
+F:\test\vmm\vmm\obj\Debug\vmm.pdb
