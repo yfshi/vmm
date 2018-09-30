@@ -120,7 +120,8 @@
   <ItemGroup>
     <None Include="Resources\add.ico" />
     <None Include="Resources\删除.ico" />
-    <None Include="Resources\backgourd.jpg" />
+    <None Include="Resources\export.ico" />
+    <None Include="Resources\import.ico" />
     <Content Include="vm.xml" />
   </ItemGroup>
   <ItemGroup>

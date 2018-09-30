@@ -42,15 +42,16 @@ namespace vmm
                 else
                     checkCell.Value = true;
             }
-            else if (e.ColumnIndex == 6 || e.ColumnIndex == 7 || e.ColumnIndex == 8) //启动、挂起、停止按钮
+            else if (e.ColumnIndex == 7 || e.ColumnIndex == 8 || e.ColumnIndex == 9) //启动、挂起、停止按钮
             {
                 Vm vm = new Vm();
-                vm.control(e.ColumnIndex - 6, this.dataGridView.Rows[e.RowIndex].Cells["path"].Value.ToString());
+                vm.control(e.ColumnIndex - 7, this.dataGridView.Rows[e.RowIndex].Cells["path"].Value.ToString());
                 refreshAll_Click(sender, e);
             }
-            else if (e.ColumnIndex == 9)
+            else if (e.ColumnIndex == 10)
             {
                 vmFile.vmHost host = new vmFile.vmHost();
+                host.id = this.dataGridView.Rows[e.RowIndex].Cells["id"].Value.ToString();
                 host.name = this.dataGridView.Rows[e.RowIndex].Cells["name"].Value.ToString();
                 host.path = this.dataGridView.Rows[e.RowIndex].Cells["path"].Value.ToString();
                 editForm(sender, e, false, host);
@@ -73,6 +74,7 @@ namespace vmm
                     int index = this.dataGridView.Rows.Add();
                     DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)this.dataGridView.Rows[index].Cells["check"];
                     checkCell.Value = false;
+                    this.dataGridView.Rows[index].Cells["id"].Value = vmHost.id;
                     this.dataGridView.Rows[index].Cells["name"].Value = vmHost.name;
                     this.dataGridView.Rows[index].Cells["name"].ToolTipText = vmHost.path;
                     this.dataGridView.Rows[index].Cells["displayName"].Value = vmHost.displayName;
@@ -207,8 +209,8 @@ namespace vmm
                 if (Convert.ToBoolean(checkCell.Value))
                 {
                     vmFile vfile = new vmFile();
-                    hList.Add(this.dataGridView.Rows[i].Cells["name"].Value.ToString());
-                    hosts = hosts + "\r\n" + this.dataGridView.Rows[i].Cells["name"].Value.ToString();
+                    hList.Add(this.dataGridView.Rows[i].Cells["id"].Value.ToString());
+                    hosts = hosts + "\r\n" + this.dataGridView.Rows[i].Cells["id"].Value.ToString();
                 }
             }
 
@@ -216,7 +218,7 @@ namespace vmm
             {
                 DialogResult res;
 
-                res = MessageBox.Show(hosts, "确定", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                res = MessageBox.Show(hosts, "删除", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 //MessageBox.Show(res.ToString());
                 if (res == DialogResult.OK)
                 {
@@ -294,57 +296,79 @@ namespace vmm
          */
         private void editForm(object sender, EventArgs e, bool flag, vmFile.vmHost host)
         {
+            /*
+             * 控件列表
+             * - Form：主窗体
+             *   - Label：顶部警告框，默认为空
+             *   - Label：id
+             *   - Lable+TextBox：name标签和输入框
+             *   - Lable+TextBox：path标签和输入框
+             *   - Button：底部确定按钮
+             *   - Button：底部取消按钮
+             */
             Form cForm = new Form();
+            Label warnL = new Label();
+            Label idL = new Label();
+            Label nameL = new Label();
+            TextBox nameB = new TextBox();
+            Label pathL = new Label();
+            TextBox pathB = new TextBox();
+            Button yesB = new Button();
+            Button noB = new Button();
+
+            //主窗体
             if (flag)
                 cForm.Text = "添加虚拟机";
             else
-                cForm.Text = "编辑虚拟机";
+                cForm.Text = "编辑虚拟机[" + host.id + "]";
             cForm.StartPosition = FormStartPosition.CenterScreen;
             cForm.Width = 400;
             cForm.Height = 250;
+            cForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            cForm.MaximizeBox = false;
 
             //顶部警告框
-            Label warnL = new Label();
             warnL.Name = "warn";
             warnL.Width = 380;
             warnL.ForeColor = System.Drawing.Color.Red;
             warnL.Location = new Point(10, 10);
-            cForm.Controls.Add(warnL);
+
+            //id
+            idL.Name = "id";
+            if (flag)
+                idL.Text = "";
+            else
+                idL.Text = host.id;
+            idL.Location = new Point(50, 30);
+            idL.Visible = false;
 
             /*
              * 名称和输入框
              *         _____________
              *   名称 |____________|
              */
-            Label nameL = new Label();
             nameL.Text = "名称";
             nameL.Width = 50;
             nameL.Location = new Point(50, 50);
-            cForm.Controls.Add(nameL);
 
-            TextBox nameB = new TextBox();
             nameB.Name = "name";
             nameB.Width = 250;
             nameB.Location = new Point(100, 50);
             if (!flag)
             {
                 nameB.Text = host.name;
-                nameB.Enabled = false;
+                //nameB.Enabled = false;
             }
-            cForm.Controls.Add(nameB);
 
             /*
              * 位置和输入框
              *         _____________
              *   位置 |____________|
              */
-            Label pathL = new Label();
             pathL.Text = "位置";
             pathL.Width = 50;
             pathL.Location = new Point(50, 100);
-            cForm.Controls.Add(pathL);
 
-            TextBox pathB = new TextBox();
             pathB.Name = "path";
             pathB.Width = 250;
             pathB.Location = new Point(100, 100);
@@ -352,39 +376,45 @@ namespace vmm
             {
                 pathB.Text = host.path;
             }
-            cForm.Controls.Add(pathB);
 
             //底部确定按钮
-            Button yesB = new Button();
             yesB.Text = "确定";
             yesB.Width = 50;
             yesB.Location = new Point(125, 150);
-            yesB.Click += yesB_Click;
-            cForm.Controls.Add(yesB);
+            yesB.Click += editYesButton_Click;
 
             //底部取消按钮
-            Button noB = new Button();
             noB.Text = "取消";
             noB.Width = 50;
             noB.Location = new Point(225, 150);
-            noB.Click += noB_Click;
-            cForm.Controls.Add(noB);
+            noB.Click += editNoButton_Click;
 
+            //加载控件和窗口
+            cForm.Controls.Add(warnL);
+            cForm.Controls.Add(idL);
+            cForm.Controls.Add(nameL);
+            cForm.Controls.Add(nameB);
+            cForm.Controls.Add(pathL);
+            cForm.Controls.Add(pathB);
+            cForm.Controls.Add(yesB);
+            cForm.Controls.Add(noB);
             cForm.ShowDialog();
         }
 
-        //编辑窗口的确定按钮事件
-        private void yesB_Click(object sender, EventArgs e)
+        //“编辑窗口”的“确定”按钮事件
+        private void editYesButton_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             Form fm = (Form)btn.Parent;
+            Label idL = (Label)fm.Controls[fm.Controls.IndexOfKey("id")];
             TextBox nameB = (TextBox)fm.Controls[fm.Controls.IndexOfKey("name")];
             TextBox pathB = (TextBox)fm.Controls[fm.Controls.IndexOfKey("path")];
             Label warnL = (Label)fm.Controls[fm.Controls.IndexOfKey("warn")];
 
             //窗口类型：添加？编辑？
-            bool flag = fm.Text.Equals("添加虚拟机");
+            bool flag = (idL.Text.Length == 0);
 
+            string id = idL.Text.Trim();
             string name = nameB.Text.Trim();
             string path = pathB.Text.Trim();
 
@@ -402,30 +432,246 @@ namespace vmm
                 return;
             }
 
-            if (flag && vfile.isVmHostExist(name))
+            if (flag && vfile.isVmHostExist(id))
             {
                 warnL.Text = "虚拟机["+name+"]已经存在";
                 return;
             }
             
             vmFile.vmHost host = new vmFile.vmHost();
+            host.id = id;
             host.name = name;
             host.path = path;
 
             if (flag)
+            {
+                host.id = System.Guid.NewGuid().ToString();
                 vfile.addVmHost(host);
+            }
             else
                 vfile.editVmHost(host);
 
             fm.Close();
         }
 
-        //编辑窗口的取消事件
-        private void noB_Click(object sender, EventArgs e)
+        //“编辑窗口”的“取消”按钮
+        private void editNoButton_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             Form fm = (Form)btn.Parent;
             fm.Close();
+        }
+
+        //“导入”按钮事件
+        private void import_Click(object sender, EventArgs e)
+        {
+            string fileName;
+            try
+            {
+                //选择导入文件
+                OpenFileDialog iF = new OpenFileDialog();
+                if (iF.ShowDialog() != DialogResult.OK)
+                {
+                    refreshAll_Click(sender, e);
+                    return;
+                }
+                fileName = iF.FileName.ToString();
+
+                importForm(fileName);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("Exception:\r\n" + ex.Message.ToString());
+            }  
+        }
+
+        //导入窗口，显示“导入文件”中的的数据列表
+        private void importForm(string fileName)
+        {
+            /*
+             * 控件列表
+             *  - Form
+             *    - label：放文件名
+             *    - Panal：面板，防止DataGridView
+             *      - DataGridView：表格 name,path
+             *    - Button：底部确定按钮
+             *    - Button：底部取消按钮
+             */
+            Form iForm = new Form();
+            Label fL = new Label();
+            Panel iP = new Panel();
+            DataGridView iView = new DataGridView();
+            DataGridViewTextBoxColumn nBox = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn pBox = new DataGridViewTextBoxColumn();
+            Button iYes = new Button();
+            Button iNo = new Button();
+
+            //fileLabel
+            fL.Name = "file";
+            fL.Text = fileName;
+            fL.Visible = false;
+            fL.Location = new Point(0, 0);
+
+            //Panal
+            iP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                    | System.Windows.Forms.AnchorStyles.Left)
+                    | System.Windows.Forms.AnchorStyles.Right)));
+            iP.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            iP.BackColor = System.Drawing.Color.Transparent;
+            iP.Controls.Add(iView);
+            iP.Location = new Point(20, 15);
+            iP.Name = "iPanal";
+            iP.Size = new System.Drawing.Size(560, 400);
+
+            //表格
+            iView.AllowUserToAddRows = false;
+            iView.AllowUserToDeleteRows = false;
+            iView.AllowUserToResizeColumns = false;
+            iView.AllowUserToResizeRows = false;
+            iView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            iView.BackgroundColor = iForm.BackColor;
+            iView.BorderStyle = BorderStyle.None;
+            iView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            iView.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            iView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            iView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { nBox, pBox });
+            iView.Dock = System.Windows.Forms.DockStyle.Fill;
+            iView.EnableHeadersVisualStyles = false;
+            iView.Location = new System.Drawing.Point(0, 0);
+            iView.Name = "iView";
+            iView.ReadOnly = true;
+            iView.RowHeadersVisible = false;
+
+            //表格name列
+            nBox.FillWeight = 30;
+            nBox.Name = "name";
+
+            //表格path列
+            pBox.FillWeight = 70;
+            pBox.Name = "path";
+
+            //iYes
+            iYes.Anchor = (AnchorStyles.Bottom);
+            iYes.Click += new System.EventHandler(importYesButton_Click);
+            iYes.Location = new Point(200, 450);
+            iYes.Name = "yes";
+            iYes.Text = "确定";
+            iYes.Width = 50;
+
+            //iNo
+            iNo.Anchor = (AnchorStyles.Bottom);
+            iNo.Click += new System.EventHandler(importNoButton_Click);
+            iNo.Location = new Point(350, 450);
+            iNo.Name = "no";
+            iNo.Text = "取消";
+            iNo.Width = 50;
+
+            //iForm
+            iForm.AllowDrop = true;
+            iForm.ClientSize = new Size(600, 500);
+            iForm.Controls.Add(fL);
+            iForm.Controls.Add(iP);
+            iForm.Controls.Add(iYes);
+            iForm.Controls.Add(iNo);
+            iForm.Name = "iForm";
+            iForm.KeyPreview = true;
+            iForm.StartPosition = FormStartPosition.CenterScreen;
+            iForm.Text = "导入";
+
+            //layout
+            iForm.Load += new System.EventHandler(iForm_Load);
+            iForm.KeyDown += new System.Windows.Forms.KeyEventHandler(iForm_KeyDown);
+            iP.ResumeLayout(false);
+            iForm.ResumeLayout(false);
+
+            iForm.ShowDialog();
+        }
+
+        //“导入窗口”的键盘事件
+        private void iForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F5:
+                    iForm_Load(sender, e);
+                    break;
+            }
+        }
+
+        //“导入窗口”的load
+        private void iForm_Load(object sender, EventArgs e)
+        {
+            Form iForm = (Form)sender;
+            Label fL = (Label)iForm.Controls["file"];
+            DataGridView iView = (DataGridView)((Panel)iForm.Controls["iPanal"]).Controls["iView"];
+            bool hasError = false;
+
+            //清空原来的表格
+            iView.Rows.Clear();
+
+            StreamReader sr = new StreamReader(fL.Text, false);
+            string line;
+            string[] segs;
+            while ((line = sr.ReadLine()) != null)
+            {
+                line = line.Trim();
+                if (string.IsNullOrEmpty(line))
+                    continue;
+                segs = line.Split(',');
+                if (segs.Length <= 0)
+                {
+                    continue;
+                }
+                else if (segs.Length != 2)
+                {
+                    int index = iView.Rows.Add();
+                    iView.Rows[index].Cells["name"].Value = segs[0];
+                    iView.Rows[index].Cells["path"].Value = "这是一条错误的数据";
+                    hasError = true;
+                }
+                else
+                {
+                    int index = iView.Rows.Add();
+                    iView.Rows[index].Cells["name"].Value = segs[0];
+                    iView.Rows[index].Cells["path"].Value = segs[1];
+                    hasError = true;
+                }
+            }
+            sr.Close();
+
+            //文件有错误，不能点击确定按钮
+            if (hasError)
+            {
+                iForm.Controls["yes"].Enabled = false;
+            }
+        }
+
+        //“导入窗口”的yes按钮事件
+        private void importYesButton_Click(object sender, EventArgs e)
+        {
+            Form iForm = (Form)((Button)sender).Parent;
+            DataGridView iView = (DataGridView)((Panel)iForm.Controls["iPanal"]).Controls["iView"];
+            vmFile vfile = new vmFile();
+
+            for (int i = 0; i < iView.Rows.Count; i++)
+            {
+                vmFile.vmHost host = new vmFile.vmHost();
+                host.name = iView.Rows[i].Cells["name"].Value.ToString();
+                host.path = iView.Rows[i].Cells["path"].Value.ToString();
+                vfile.addVmHost(host);
+            }
+        }
+
+        //”导入窗口“的no按钮事件
+        private void importNoButton_Click(object sender, EventArgs e)
+        {
+            Form iForm = (Form)((Button)sender).Parent;
+            iForm.Close();
+        }
+
+        private void export_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("该功能尚未开放");
         }
     }
 }

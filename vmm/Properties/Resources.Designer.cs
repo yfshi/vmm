@@ -74,9 +74,16 @@ namespace vmm.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap backgourd {
+        internal static System.Drawing.Bitmap export {
             get {
-                object obj = ResourceManager.GetObject("backgourd", resourceCulture);
+                object obj = ResourceManager.GetObject("export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap import {
+            get {
+                object obj = ResourceManager.GetObject("import", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

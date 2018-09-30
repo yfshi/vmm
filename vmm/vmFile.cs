@@ -19,6 +19,7 @@ namespace vmm
 
         public class vmHost
         {
+            public string id;  //guid
             public string name;
             public string path;
         }
@@ -34,6 +35,7 @@ namespace vmm
             foreach (XmlNode node in nodeList)
             {
                 vmHost host = new vmHost();
+                host.id = node.Attributes["id"].InnerText;
                 host.name = node.Attributes["name"].InnerText;
                 host.path = node.InnerText;
                 list.Add(host);
@@ -60,11 +62,11 @@ namespace vmm
             return path;
         }
 
-        public bool isVmHostExist(string name)
+        public bool isVmHostExist(string id)
         {
             XmlNode node;
             XmlNode root = doc.DocumentElement;
-            node = root.SelectSingleNode("//vmhost[@name='" + name + "']");
+            node = root.SelectSingleNode("//vmhost[@id='" + id + "']");
             if (node == null)
             {
                 return false;
@@ -77,20 +79,27 @@ namespace vmm
         {
             XmlNode node;
             XmlNode root = doc.DocumentElement;
-            node = root.SelectSingleNode("//vmhost[@name='" + host.name + "']");
+            node = root.SelectSingleNode("//vmhost[@id='" + host.id + "']");
             if (node == null)
             {
                 XmlElement vmNode = doc.CreateElement("vmhost");
                 vmNode.InnerText = host.path;
-                XmlAttribute attr = doc.CreateAttribute("name");
-                attr.InnerText = host.name;
-                vmNode.Attributes.Append(attr);
+
+                //attr:name
+                XmlAttribute nameAttr = doc.CreateAttribute("name");
+                nameAttr.InnerText = host.name;
+                vmNode.Attributes.Append(nameAttr);
+                //attr:id
+                XmlAttribute idAttr = doc.CreateAttribute("id");
+                idAttr.InnerText = host.id;
+                vmNode.Attributes.Append(idAttr);
+
                 root.AppendChild(vmNode);
                 doc.Save(vmFilePath);
             }
             else
             {
-                MessageBox.Show(host.name + "已存在");
+                MessageBox.Show(host.id + "已存在");
             }
         }
 
@@ -98,23 +107,24 @@ namespace vmm
         {
             XmlNode node;
             XmlNode root = doc.DocumentElement;
-            node = root.SelectSingleNode("//vmhost[@name='" + host.name + "']");
+            node = root.SelectSingleNode("//vmhost[@id='" + host.id + "']");
             if (node == null)
             {
-                MessageBox.Show(host.name + "不存在");
+                MessageBox.Show(host.id + "不存在");
             }
             else
             {
                 node.InnerText = host.path;
+                node.Attributes["name"].InnerText = host.name;
                 doc.Save(vmFilePath);
             }
         }
 
-        public void delVmHost(string name)
+        public void delVmHost(string id)
         {
             XmlNode node;
             XmlNode root = doc.DocumentElement;
-            node = root.SelectSingleNode("//vmhost[@name='" + name + "']");
+            node = root.SelectSingleNode("//vmhost[@id='" + id + "']");
             if (node != null)
             {
                 node.ParentNode.RemoveChild(node);

@@ -23,6 +23,7 @@ namespace vmm
          */
         public class vmState
         {
+            public string id;
             public string name;
             public string displayName;
             public string path;
@@ -104,6 +105,7 @@ namespace vmm
             foreach (vmFile.vmHost vh in vmHostList)
             {
                 vmState vs = new vmState();
+                vs.id = vh.id;
                 vs.name = vh.name;
                 vs.path = vh.path;
 
