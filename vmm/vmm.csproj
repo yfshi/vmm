@@ -13,10 +13,6 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Resources\app.ico</ApplicationIcon>
-    <ManifestCertificateThumbprint>C02A3E06EDE24DBC9E033997FC745DB8F9756B3F</ManifestCertificateThumbprint>
-    <ManifestKeyFile>vmm_TemporaryKey.pfx</ManifestKeyFile>
-    <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>

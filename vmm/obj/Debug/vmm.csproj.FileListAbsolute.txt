@@ -22,3 +22,11 @@ F:\Code\vmm\vmm\obj\Debug\vmm.VmmForm.resources
 F:\Code\vmm\vmm\obj\Debug\vmm.csproj.GenerateResource.Cache
 F:\Code\vmm\vmm\obj\Debug\vmm.exe.manifest
 F:\Code\vmm\vmm\obj\Debug\vmm.application
+E:\code\vmm\vmm\obj\Debug\vmm.exe
+E:\code\vmm\vmm\obj\Debug\vmm.pdb
+E:\code\vmm\vmm\obj\Debug\ResolveAssemblyReference.cache
+E:\code\vmm\vmm\obj\Debug\vmm.Properties.Resources.resources
+E:\code\vmm\vmm\obj\Debug\vmm.VmmForm.resources
+E:\code\vmm\vmm\obj\Debug\vmm.csproj.GenerateResource.Cache
+E:\code\vmm\vmm\bin\Debug\vmm.exe
+E:\code\vmm\vmm\bin\Debug\vmm.pdb

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Windows.Forms;
+using System.IO;
 
 namespace vmm
 {
@@ -43,6 +44,20 @@ namespace vmm
             }
 
             return list;
+        }
+
+        public void exportVmHostList(string file)
+        {
+            List<vmHost> list = getVmHostList();
+            StreamWriter sw = new StreamWriter(file, false);
+
+            foreach (vmHost host in list)
+            {
+                sw.WriteLine(host.name + "," + host.path);
+            }
+
+            sw.Flush();
+            sw.Close();
         }
 
         public string getVmrunPath()

@@ -634,7 +634,6 @@ namespace vmm
                     int index = iView.Rows.Add();
                     iView.Rows[index].Cells["name"].Value = segs[0];
                     iView.Rows[index].Cells["path"].Value = segs[1];
-                    hasError = true;
                 }
             }
             sr.Close();
@@ -656,9 +655,12 @@ namespace vmm
             for (int i = 0; i < iView.Rows.Count; i++)
             {
                 vmFile.vmHost host = new vmFile.vmHost();
+                host.id = System.Guid.NewGuid().ToString();
                 host.name = iView.Rows[i].Cells["name"].Value.ToString();
                 host.path = iView.Rows[i].Cells["path"].Value.ToString();
                 vfile.addVmHost(host);
+                iForm.Close();
+                refreshAll_Click(sender, e);
             }
         }
 
@@ -669,9 +671,35 @@ namespace vmm
             iForm.Close();
         }
 
+        //“导出窗口”的按钮事件
         private void export_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("该功能尚未开放");
+            try
+            {
+                SaveFileDialog oF = new SaveFileDialog();
+                //设置文件类型
+                oF.Filter = "数据文件(*.txt) | *.txt|数据文件(*.csv) | *.csv |数据文件(*.bak) | *.bak";
+                //文件的显示顺序
+                oF.FilterIndex = 1;
+                //保存对话框是否记忆上次打开的目录
+                oF.RestoreDirectory = true;
+                //设置默认的文件名
+                oF.FileName = "虚拟机备份";
+
+                DialogResult res;
+                res = oF.ShowDialog();
+                if (res != DialogResult.OK)
+                    return;
+
+                string localFilePath = oF.FileName.ToString();
+
+                vmFile vfile = new vmFile();
+                vfile.exportVmHostList(localFilePath);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("Exception:\r\n" + ex.Message.ToString());
+            }
         }
     }
 }
