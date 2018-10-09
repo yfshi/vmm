@@ -14,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Resources\app.ico</ApplicationIcon>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <Win32Resource>
+    </Win32Resource>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -118,6 +120,7 @@
     <None Include="Resources\删除.ico" />
     <None Include="Resources\export.ico" />
     <None Include="Resources\import.ico" />
+    <Content Include="app.ico" />
     <Content Include="vm.xml" />
   </ItemGroup>
   <ItemGroup>

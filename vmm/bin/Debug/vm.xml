@@ -1,4 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <vmm>
-  <vmware>C:\Program Files (x86)\VMware\VMware Workstation</vmware>
+  <vmware>D:\Program Files (x86)\VMware\VMware Workstation</vmware>
+  <vmhost name="vm" id="8e09ecd8-62d7-48b8-bba2-31159f8eaf3a">H:\Vmwares\CentOS6.4\CentOS6.4.vmx</vmhost>
+  <vmhost name="kadev" id="c4886b11-ac73-4abd-a75a-df8290086cf5">H:\Vmwares\kadev\ka.vmx</vmhost>
+  <vmhost name="ka" id="ed845441-0483-49e5-8e73-a96b60511149">H:\Vmwares\ka\ka.vmx</vmhost>
+  <vmhost name="ka1" id="5657d2d2-60d4-424d-b2d1-58cf12ed4ddf">H:\Vmwares\ka1\ka.vmx</vmhost>
+  <vmhost name="ka2" id="55ef8b9c-e26a-4fd7-81c9-6ba06e1b95ea">H:\Vmwares\ka2\ka.vmx</vmhost>
+  <vmhost name="ka3" id="68ca53bb-60e5-4d50-961c-8d498b0dd284">H:\Vmwares\ka3\ka.vmx</vmhost>
+  <vmhost name="kas" id="88d10463-d50b-4e85-b885-92a1eeeb7298">H:\Vmwares\ka4\ka.vmx</vmhost>
+  <vmhost name="gp" id="fca2bf35-3879-4a51-b6f5-12315bb3d2f0">F:\vmhosts\VMware\CentOS7.0 - gp\CentOS7.0.vmx</vmhost>
+  <vmhost name="gp1" id="bd91a362-4951-45c4-bb9a-4ec522c4d4b0">F:\vmhosts\VMware\CentOS7.0 - gp1\CentOS7.0.vmx</vmhost>
+  <vmhost name="F:\vmhosts\VMware\CentOS6.4 - gp" id="2b90b412-5a8e-44ba-8c02-8eb2c0cfe988">F:\vmhosts\VMware\CentOS6.4 - gp\gp.vmx</vmhost>
 </vmm>

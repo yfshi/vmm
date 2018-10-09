@@ -164,7 +164,6 @@
             // 
             // name
             // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
             this.name.DefaultCellStyle = dataGridViewCellStyle2;
             this.name.HeaderText = "名称";
@@ -172,7 +171,6 @@
             this.name.Name = "name";
             this.name.ReadOnly = true;
             this.name.ToolTipText = "用户自定义名称";
-            this.name.Width = 55;
             // 
             // path
             // 
@@ -184,13 +182,11 @@
             // 
             // displayName
             // 
-            this.displayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.displayName.HeaderText = "虚拟机";
             this.displayName.MinimumWidth = 50;
             this.displayName.Name = "displayName";
             this.displayName.ReadOnly = true;
             this.displayName.ToolTipText = "VMWare Workstation中的显示名称";
-            this.displayName.Width = 68;
             // 
             // state
             // 
