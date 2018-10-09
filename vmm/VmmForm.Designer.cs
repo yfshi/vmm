@@ -48,6 +48,7 @@
             this.suspend = new System.Windows.Forms.DataGridViewButtonColumn();
             this.stop = new System.Windows.Forms.DataGridViewButtonColumn();
             this.edit = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.setup = new System.Windows.Forms.Button();
             this.export = new System.Windows.Forms.Button();
             this.import = new System.Windows.Forms.Button();
             this.deleteSelected = new System.Windows.Forms.Button();
@@ -249,6 +250,26 @@
             this.edit.ReadOnly = true;
             this.edit.Width = 50;
             // 
+            // setup
+            // 
+            this.setup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.setup.BackColor = System.Drawing.Color.Transparent;
+            this.setup.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.setup.FlatAppearance.BorderSize = 0;
+            this.setup.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.setup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.setup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.setup.Image = global::vmm.Properties.Resources.setup;
+            this.setup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.setup.Location = new System.Drawing.Point(445, 38);
+            this.setup.Name = "setup";
+            this.setup.Size = new System.Drawing.Size(54, 23);
+            this.setup.TabIndex = 11;
+            this.setup.Text = "设置";
+            this.setup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.setup.UseVisualStyleBackColor = false;
+            this.setup.Click += new System.EventHandler(this.setup_Click);
+            // 
             // export
             // 
             this.export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -339,7 +360,7 @@
             this.stopSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopSelected.Image = global::vmm.Properties.Resources.stop;
             this.stopSelected.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.stopSelected.Location = new System.Drawing.Point(241, 12);
+            this.stopSelected.Location = new System.Drawing.Point(146, 12);
             this.stopSelected.Name = "stopSelected";
             this.stopSelected.Size = new System.Drawing.Size(54, 23);
             this.stopSelected.TabIndex = 4;
@@ -358,7 +379,7 @@
             this.suspendSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.suspendSelected.Image = global::vmm.Properties.Resources.suspend;
             this.suspendSelected.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.suspendSelected.Location = new System.Drawing.Point(170, 12);
+            this.suspendSelected.Location = new System.Drawing.Point(86, 12);
             this.suspendSelected.Name = "suspendSelected";
             this.suspendSelected.Size = new System.Drawing.Size(54, 23);
             this.suspendSelected.TabIndex = 3;
@@ -377,7 +398,7 @@
             this.startSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startSelected.Image = global::vmm.Properties.Resources.start;
             this.startSelected.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.startSelected.Location = new System.Drawing.Point(97, 12);
+            this.startSelected.Location = new System.Drawing.Point(26, 12);
             this.startSelected.Name = "startSelected";
             this.startSelected.Size = new System.Drawing.Size(54, 23);
             this.startSelected.TabIndex = 2;
@@ -388,6 +409,7 @@
             // 
             // refreshAll
             // 
+            this.refreshAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.refreshAll.BackColor = System.Drawing.Color.Transparent;
             this.refreshAll.Cursor = System.Windows.Forms.Cursors.Hand;
             this.refreshAll.FlatAppearance.BorderSize = 0;
@@ -397,7 +419,7 @@
             this.refreshAll.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.refreshAll.Image = global::vmm.Properties.Resources.refresh;
             this.refreshAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.refreshAll.Location = new System.Drawing.Point(26, 12);
+            this.refreshAll.Location = new System.Drawing.Point(445, 12);
             this.refreshAll.Name = "refreshAll";
             this.refreshAll.Size = new System.Drawing.Size(54, 23);
             this.refreshAll.TabIndex = 1;
@@ -412,6 +434,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 488);
+            this.Controls.Add(this.setup);
             this.Controls.Add(this.export);
             this.Controls.Add(this.import);
             this.Controls.Add(this.deleteSelected);
@@ -458,6 +481,7 @@
         private System.Windows.Forms.DataGridViewButtonColumn suspend;
         private System.Windows.Forms.DataGridViewButtonColumn stop;
         private System.Windows.Forms.DataGridViewButtonColumn edit;
+        private System.Windows.Forms.Button setup;
     }
 }
 

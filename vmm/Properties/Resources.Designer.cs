@@ -95,6 +95,13 @@ namespace vmm.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap setup {
+            get {
+                object obj = ResourceManager.GetObject("setup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap start {
             get {
                 object obj = ResourceManager.GetObject("start", resourceCulture);

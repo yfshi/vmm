@@ -120,7 +120,7 @@
     <None Include="Resources\删除.ico" />
     <None Include="Resources\export.ico" />
     <None Include="Resources\import.ico" />
-    <Content Include="app.ico" />
+    <None Include="Resources\setup.ico" />
     <Content Include="vm.xml" />
   </ItemGroup>
   <ItemGroup>

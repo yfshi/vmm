@@ -1,0 +1,8 @@
+F:\Code\vmm\vmm\obj\Release\ResolveAssemblyReference.cache
+F:\Code\vmm\vmm\obj\Release\vmm.Properties.Resources.resources
+F:\Code\vmm\vmm\obj\Release\vmm.VmmForm.resources
+F:\Code\vmm\vmm\obj\Release\vmm.csproj.GenerateResource.Cache
+F:\Code\vmm\vmm\bin\Release\vmm.exe
+F:\Code\vmm\vmm\bin\Release\vmm.pdb
+F:\Code\vmm\vmm\obj\Release\vmm.exe
+F:\Code\vmm\vmm\obj\Release\vmm.pdb

@@ -37,7 +37,7 @@ namespace vmm
             vmFile vfile = new vmFile();
 
             System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.FileName = vfile.getVmrunPath();
+            p.StartInfo.FileName = vfile.getVmrunPath() + "\\vmrun.exe";
             p.StartInfo.Arguments = "list";
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;
@@ -81,7 +81,7 @@ namespace vmm
             vmFile vfile = new vmFile();
 
             System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.FileName = vfile.getVmrunPath();
+            p.StartInfo.FileName = vfile.getVmrunPath() + "\\vmrun.exe";
             p.StartInfo.Arguments = args;
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;

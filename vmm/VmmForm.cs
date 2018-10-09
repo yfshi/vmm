@@ -701,5 +701,103 @@ namespace vmm
                 MessageBox.Show("Exception:\r\n" + ex.Message.ToString());
             }
         }
+
+        //设置窗口
+        private void setup_Click(object sender, EventArgs e)
+        {
+            /*
+             * 控件列表
+             * - Form：主窗体
+             *   - Label：顶部警告框，默认为空
+             *   - Lable+TextBox：VMware路径标签和输入框
+             *   - Button：底部确定按钮
+             *   - Button：底部取消按钮
+             */
+            Form cForm = new Form();
+            Label warnL = new Label();
+            Label pathL = new Label();
+            TextBox pathB = new TextBox();
+            Button yesB = new Button();
+            Button noB = new Button();
+
+            //主窗体
+            cForm.Text = "编辑";
+            cForm.StartPosition = FormStartPosition.CenterScreen;
+            cForm.Width = 400;
+            cForm.Height = 250;
+            cForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            cForm.MaximizeBox = false;
+
+            //顶部警告框
+            warnL.Name = "warn";
+            warnL.Width = 380;
+            warnL.ForeColor = System.Drawing.Color.Red;
+            warnL.Location = new Point(10, 10);
+
+            /*
+             * VMware Workstation位置和输入框
+             *                    _____________
+             *   VMware安装路径 |____________|
+             */
+            pathL.Text = "VMware安装路径";
+            pathL.Width = 90;
+            pathL.Location = new Point(50, 70);
+
+            pathB.Name = "path";
+            pathB.Width = 210;
+            pathB.Location = new Point(140, 70);
+            vmFile vfile = new vmFile();
+            pathB.Text = vfile.getVmrunPath();;
+
+            //底部确定按钮
+            yesB.Text = "确定";
+            yesB.Width = 50;
+            yesB.Location = new Point(125, 150);
+            yesB.Click += setupYesButton_Click;
+
+            //底部取消按钮
+            noB.Text = "取消";
+            noB.Width = 50;
+            noB.Location = new Point(225, 150);
+            noB.Click += setupNoButton_Click;
+
+            //加载控件和窗口
+            cForm.Controls.Add(warnL);
+            cForm.Controls.Add(pathL);
+            cForm.Controls.Add(pathB);
+            cForm.Controls.Add(yesB);
+            cForm.Controls.Add(noB);
+            cForm.ShowDialog();
+        }
+
+        //“设置窗口”的“确定”按钮事件
+        private void setupYesButton_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            Form fm = (Form)btn.Parent;
+            TextBox pathB = (TextBox)fm.Controls[fm.Controls.IndexOfKey("path")];
+            Label warnL = (Label)fm.Controls[fm.Controls.IndexOfKey("warn")];
+
+            string path = pathB.Text.Trim();
+            if (string.IsNullOrEmpty(path))
+            {
+                warnL.Text = "VMware路径不能为空";
+                return;
+            }
+
+            vmFile vfile = new vmFile();
+
+            vfile.setupVmrunPath(path);
+
+            fm.Close();
+        }
+
+        //“设置窗口”的“取消”按钮
+        private void setupNoButton_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            Form fm = (Form)btn.Parent;
+            fm.Close();
+        }
     }
 }

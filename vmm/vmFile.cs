@@ -71,10 +71,30 @@ namespace vmm
             {
                 path += node.InnerText;
             }
-            path += "\\vmrun.exe";
+            //path += "\\vmrun.exe";
 
             //MessageBox.Show(path);
             return path;
+        }
+
+        public void setupVmrunPath(string path)
+        {
+            XmlNode node;
+            XmlNode root = doc.DocumentElement;
+
+            node = root.SelectSingleNode("//vmware");
+            if (node != null)
+            {
+                node.InnerText = path;
+                doc.Save(vmFilePath);
+            }
+            else
+            {
+                XmlElement vmNode = doc.CreateElement("vmware");
+                vmNode.InnerText = path;
+                root.AppendChild(vmNode);
+                doc.Save(vmFilePath);
+            }
         }
 
         public bool isVmHostExist(string id)
