@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vmm", "vmm\vmm.csproj", "{EA71B68D-F7C0-4E32-820A-B05B670BEB69}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "VMware Workstation Manager", "VMware Workstation Manager\VMware Workstation Manager.vdproj", "{9F73ADEE-B5A6-4BDC-A5D9-6A0B3921C224}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,8 @@ Global
 		{EA71B68D-F7C0-4E32-820A-B05B670BEB69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA71B68D-F7C0-4E32-820A-B05B670BEB69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA71B68D-F7C0-4E32-820A-B05B670BEB69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F73ADEE-B5A6-4BDC-A5D9-6A0B3921C224}.Debug|Any CPU.ActiveCfg = Debug
+		{9F73ADEE-B5A6-4BDC-A5D9-6A0B3921C224}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
